@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+
+        <form action="/new">
+            {% csrf_token %}
+            {form.as_p}
+        </form>
+
+    {% endblock %}
