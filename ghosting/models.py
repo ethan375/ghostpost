@@ -6,4 +6,4 @@ class Post(models.Model):
     post = models.CharField(max_length=280)
     up_votes = models.IntegerField()
     down_votes = models.IntegerField()
-    creation_time = models.DateTimeField()
+    creation_time = models.DateTimeField(auto_now=True)
