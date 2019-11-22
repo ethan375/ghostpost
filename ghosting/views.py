@@ -12,13 +12,13 @@ def home(request):
 
 
 def boasts(request):
-    posts = Post.objects.filter(boast=True)
+    posts = Post.objects.filter(boast=True).order_by('-creation_time')
     context = {'posts': posts}
     return render(request, 'home.html', context)
 
 
 def roasts(request):
-    posts = Post.objects.filter(boast=False)
+    posts = Post.objects.filter(boast=False).order_by('-creation_time')
     context = {'posts': posts}
     return render(request, 'home.html', context)
 
