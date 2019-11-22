@@ -1,7 +1,29 @@
 {% extends 'base.html' %}
-
+{% load static %}
     {% block content %}
 
-        <h3>Welcome home!</h3>
+        <h3>Welcome welcome to the ghostpost! Here you can post a boast or a roast as long as its no longer than 280 characters</h3>
+
+        {% if posts %}
+            {% for post in posts %}
+                <div style="border: 1px solid black; margin: 5px;">
+                    <i class="hidden">{{post.id}}</i>
+                    {% if post.boast %}
+                        <h4 style="color: green;">Boast</h4>
+                    {% else %}
+                        <h4 style="color: red;">Roast</h4>
+                    {% endif %}
+                    <p>{{ post.post }}</p>
+                    <button class="up-vote">Vote Up</button>
+                    <p>up votes: {{ post.up_votes }}</p>
+                    <button class="down-vote">Vote Down</button>
+                    <p>down votes: {{ post.down_votes }}</p>
+                    <p>Created at: {{ post.creation_time }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <script src="{% static 'ghosting/app.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'ghosting/style.css' %}">
 
     {% endblock %}

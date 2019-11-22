@@ -5,7 +5,9 @@ from datetime import datetime
 
 
 def home(request):
-    return render(request, 'home.html')
+    posts = Post.objects.all()
+    context = {'posts': posts}
+    return render(request, 'home.html', context)
 
 
 def new_post(request):
@@ -15,7 +17,7 @@ def new_post(request):
         if form.is_valid():
             data = form.cleaned_data
 
-            post = Post.objects.create(
+            Post.objects.create(
                 boast = data['boast'],
                 post = data['post'],
                 up_votes = 0,
@@ -27,3 +29,15 @@ def new_post(request):
         form = NewPost()
         context = {'form': form}
         return render(request, 'new_post.html', context)
+
+
+def up_vote(request, id):
+    post = Post.obejcts.filter(id=id)
+    post.up_votes += 1
+    post.save()
+
+
+def down_vote(request, id):
+    post = Post.obejcts.filter(id=id)
+    post.down_votes += 1
+    post.save()
