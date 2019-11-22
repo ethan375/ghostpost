@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from .models import Post
 from ghostpost.templates.forms.form import NewPost
 from datetime import datetime
@@ -19,9 +20,7 @@ def new_post(request):
 
             Post.objects.create(
                 boast = data['boast'],
-                post = data['post'],
-                up_votes = 0,
-                down_votes = 0,
+                post = data['post']
             )
             return render(request, 'home.html')
         
@@ -32,12 +31,14 @@ def new_post(request):
 
 
 def up_vote(request, id):
-    post = Post.obejcts.filter(id=id)
+    post = Post.objects.filter(id=id).first()
     post.up_votes += 1
     post.save()
+    return redirect('/ghosting/')
 
 
 def down_vote(request, id):
-    post = Post.obejcts.filter(id=id)
+    post = Post.objects.filter(id=id).first()
     post.down_votes += 1
     post.save()
+    return redirect('/ghosting/')

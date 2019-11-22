@@ -14,16 +14,14 @@
                         <h4 style="color: red;">Roast</h4>
                     {% endif %}
                     <p>{{ post.post }}</p>
-                    <button class="up-vote">Vote Up</button>
-                    <p>up votes: {{ post.up_votes }}</p>
-                    <button class="down-vote">Vote Down</button>
-                    <p>down votes: {{ post.down_votes }}</p>
+                    <a href="/ghosting/vote/up/{{post.id}}/"><button class="up-vote">Vote Up</button></a>
+                    <p>votes: {{ post.total_votes }}</p>
+                    <a href="/ghosting/vote/down/{{post.id}}/"><button class="down-vote">Vote Down</button></a>
                     <p>Created at: {{ post.creation_time }}</p>
                 </div>
             {% endfor %}
         {% endif %}
 
-        <script src="{% static 'ghosting/app.js' %}"></script>
         <link rel="stylesheet" type="text/css" href="{% static 'ghosting/style.css' %}">
 
     {% endblock %}
