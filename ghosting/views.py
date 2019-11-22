@@ -6,7 +6,26 @@ from datetime import datetime
 
 
 def home(request):
-    posts = Post.objects.all()
+    posts = Post.objects.order_by('-creation_time')
+    context = {'posts': posts}
+    return render(request, 'home.html', context)
+
+
+def boasts(request):
+    posts = Post.objects.filter(boast=True)
+    context = {'posts': posts}
+    return render(request, 'home.html', context)
+
+
+def roasts(request):
+    posts = Post.objects.filter(boast=False)
+    context = {'posts': posts}
+    return render(request, 'home.html', context)
+
+
+def votes(request):
+    posts = sorted(Post.objects.all(), key=lambda p: p.total_votes)
+    posts = posts[::-1]
     context = {'posts': posts}
     return render(request, 'home.html', context)
 
@@ -22,7 +41,7 @@ def new_post(request):
                 boast = data['boast'],
                 post = data['post']
             )
-            return render(request, 'home.html')
+            return redirect('/ghosting/')
         
     else:
         form = NewPost()

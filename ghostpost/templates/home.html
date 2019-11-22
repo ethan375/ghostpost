@@ -2,7 +2,13 @@
 {% load static %}
     {% block content %}
 
-        <h3>Welcome welcome to the ghostpost! Here you can post a boast or a roast as long as its no longer than 280 characters</h3>
+        <h3>Welcome to the ghostpost! Here you can post a boast or a roast as long as its no longer than 280 characters</h3>
+
+        <a class="filter" href="/ghosting/new/">Create a new post</a>
+        <a class="filter" href="/ghosting/sort/boasts/">Show boasts only</a>
+        <a class="filter" href="/ghosting/sort/roasts/">Show roasts only</a>
+        <a class="filter" href="/ghosting/sort/votes/">Sort by votes</a>
+        <a class="filter" href="/ghosting/">Show all posts</a>
 
         {% if posts %}
             {% for post in posts %}
